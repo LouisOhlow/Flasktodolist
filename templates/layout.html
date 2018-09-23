@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Merriweather" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="..\static\css\index.css?q=1280549780"/>
+    <meta charset="UTF-8">
+    <title>TO-DO List</title>
+</head>
+<body>
+<header>
+  <h1>TO-DO LIST</h1>
+</header>
+  <div id="add">
+      <p id="addtext"> Add a new To-Do Item:<p>
+        <form action="/add" method="POST">
+            {{form.hidden_field}}
+            <br>Title:<br><input name="title">
+            <br>description:<br><input name="desc">
+            <br>until when?<br><input name="due">
+            <br><input type="submit" value="send">
+    </form>
+    </div>
+    <div id="entries">
+    <ul>
+        {% for entry in entries %}
+        <li>
+            <h2>{{entry.title}} </h2>
+            <p>{{entry.description}}</p>
+            <p> until {{entry.due}}</p>
+            <b>{{entry.state}}</b>
+            <br>
+            <button onclick="window.location='/delete?id={{loop.index}}';">delete</button>
+            <button onclick="window.location='/changestate?id={{loop.index}}';">change state</button>
+        </li>
+        {% endfor %}
+
+    </ul>
+      </div>
+    <footer>
+    <div id="searchform">
+        <form action="/search" method="POST">
+            <input name="searchString">
+            <br><input type="submit" value="search">
+        </form>
+
+    </div>
+        </footer>
+</body>
+</html>
